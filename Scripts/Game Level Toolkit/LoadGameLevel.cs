@@ -22,13 +22,23 @@ namespace IND.Core.GameLevels
             }
 
             //Find Any Scenes that we dont want to keep 
-            List<GameLevel> gameLevelsToUnload = currentlyLoadedLevels;
+            List<GameLevel> gameLevelsToUnload = new List<GameLevel>();
+            for (int i = 0; i < currentlyLoadedLevels.Count; i++)
+            {
+                gameLevelsToUnload.Add(currentlyLoadedLevels[i]);
+            }
+
             if (keepCurrentLevelsOpenedThatAreNotDependency == false)
             {
                 for (int i = 0; i < levelToLoad.levelDependencies.Count; i++)
                 {
                     gameLevelsToUnload.Remove(levelToLoad.levelDependencies[i]);
                 }
+            }
+
+            if(keepCurrentLevelsOpenedThatAreNotDependency == true)
+            {
+                gameLevelsToUnload.Clear();
             }
 
             //Unload any unwanted Scenes
@@ -52,7 +62,11 @@ namespace IND.Core.GameLevels
                 
             }
 
-            List<GameLevel> levelDependenciesToLoad = levelToLoad.levelDependencies;
+            List<GameLevel> levelDependenciesToLoad = new List<GameLevel>();
+            for (int i = 0; i < levelToLoad.levelDependencies.Count; i++)
+            {
+                levelDependenciesToLoad.Add(levelToLoad.levelDependencies[i]);
+            }
             if (forceReloadAnyDependenciesAlreadyOpened == true) //Unload Any Dependencies that are loaded and need a reload. 
             {
                 List<GameLevel> dependenciesToUnLoad = new List<GameLevel>();

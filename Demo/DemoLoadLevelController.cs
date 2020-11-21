@@ -7,19 +7,13 @@ namespace IND.Core.GameLevels.Demo
 {
     public class DemoLoadLevelController : MonoBehaviour
     {
-        [SerializeField] private GameLevel gameLevelToLoad;
+        [SerializeField] protected GameLevel gameLevelToLoad;
+        [SerializeField] protected bool loadLevelDependenciesBeforeLevel = true;
+        [SerializeField] protected bool keepCurrentOpenScenesOpenedThatAreNotDependencies = true;
 
-        private void OnGUI()
+        public void LoadLevel()
         {
-            if(GUILayout.Button("Load Level"))
-            {
-                LoadLevel();
-            }
-        }
-
-        private void LoadLevel()
-        {
-            LoadGameLevel.LoadLevel(gameLevelToLoad, GameLevelManager.singleton.loadedGameLevels, true, false, false);
+            LoadGameLevel.LoadLevel(gameLevelToLoad, GameLevelManager.singleton.loadedGameLevels, loadLevelDependenciesBeforeLevel, keepCurrentOpenScenesOpenedThatAreNotDependencies, false, false);
         }
     }
 }
