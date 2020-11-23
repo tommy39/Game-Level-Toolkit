@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 namespace IND.Editor.GameLevelsToolkit
 {
-    public class GameLevelToolkit : EditorWindow
+    public class GameLevelToolkitWindow : EditorWindow
     {
-        public static GameLevelToolkit toolkitWindow;
+        public static GameLevelToolkitWindow toolkitWindow;
 
         // [HideIf("initialDataHasBeenCreated")]
         public bool initialDataHasBeenCreated = false;
@@ -35,11 +35,11 @@ namespace IND.Editor.GameLevelsToolkit
             OnEditorQuit();
         }
 
-        public static GameLevelToolkit GetRefreshedToolkitWindow()
+        public static GameLevelToolkitWindow GetRefreshedToolkitWindow()
         {
             if (toolkitWindow == null)
             {
-                toolkitWindow = (GameLevelToolkit)GetWindow(typeof(GameLevelToolkit));
+                toolkitWindow = (GameLevelToolkitWindow)GetWindow(typeof(GameLevelToolkitWindow));
             }
             toolkitWindow.settings = GetGameLevelToolkitSettings();
             toolkitWindow.gameLevelsData = GetGameLevelsData();
@@ -161,7 +161,7 @@ namespace IND.Editor.GameLevelsToolkit
 
         private static string RemoveUneccessaryCharactersFromAssetPath(string originalPath)
         {
-            GameLevelToolkit toolkit = toolkitWindow;
+            GameLevelToolkitWindow toolkit = toolkitWindow;
             int amountOfCharsToRemoveFromStart = 7;
             if (toolkit.useRootProjectDirectoryPath == false)
             {
@@ -181,7 +181,7 @@ namespace IND.Editor.GameLevelsToolkit
             string projectPathName = "";
             string projectPathNameWithoutSlash = "";
 
-            GameLevelToolkit toolkit = GetRefreshedToolkitWindow();
+            GameLevelToolkitWindow toolkit = GetRefreshedToolkitWindow();
 
             if (toolkit.useRootProjectDirectoryPath == false)
             {
@@ -287,7 +287,7 @@ namespace IND.Editor.GameLevelsToolkit
 
         public static string GetProjectPathStringWithSlash()
         {
-            GameLevelToolkit toolkit = GameLevelToolkit.GetRefreshedToolkitWindow();
+            GameLevelToolkitWindow toolkit = GameLevelToolkitWindow.GetRefreshedToolkitWindow();
 
             string pathName = "";
             if (toolkit.settings.useRootProjectDirectoryPath == false)

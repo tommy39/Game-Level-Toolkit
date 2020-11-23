@@ -30,7 +30,7 @@ namespace IND.Editor.GameLevelsToolkit
         public static void OpenMenu()
         {
             window = (OpenGameLevel)GetWindow(typeof(OpenGameLevel));
-            window.gameLevelData = GameLevelToolkit.GetGameLevelsData();
+            window.gameLevelData = GameLevelToolkitWindow.GetGameLevelsData();
             window.selectedValue = 0;
             window.levels = window.gameLevelData.gameLevelsCreatedByUser.ToArray();
             List<string> levelsToString = new List<string>();
@@ -77,7 +77,7 @@ namespace IND.Editor.GameLevelsToolkit
             //Load The Master Scene
             if (includeMasterScene == true)
             {
-                string masterScenePath = "Assets/" + GameLevelToolkit.GetProjectPathStringWithSlash() + "Scenes/" + SceneAndResourceFolderName.folderNameValue + "/Master Scene/Master Scene.unity";
+                string masterScenePath = "Assets/" + GameLevelToolkitWindow.GetProjectPathStringWithSlash() + "Scenes/" + SceneAndResourceFolderName.folderNameValue + "/Master Scene/Master Scene.unity";
                 Scene masterScene;
 
                 if (keepCurrentScenesThatAreOpenOpeneded == true)

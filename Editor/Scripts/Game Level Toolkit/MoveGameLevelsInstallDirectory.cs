@@ -40,7 +40,7 @@ namespace IND.Editor.GameLevelsToolkit
                 return;
             }
 
-            GameLevelToolkit toolkit = GameLevelToolkit.GetRefreshedToolkitWindow();
+            GameLevelToolkitWindow toolkit = GameLevelToolkitWindow.GetRefreshedToolkitWindow();
 
             string targetDirectory = "";
             bool useRootDirectory = false;

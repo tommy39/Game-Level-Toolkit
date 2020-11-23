@@ -26,8 +26,8 @@ namespace IND.Editor.GameLevelsToolkit
 
         private void Uninstall()
         {
-            string resourcesFolderDir = "Assets/" + GameLevelToolkit.GetProjectPathStringWithSlash() + "Resources/" + SceneAndResourceFolderName.folderNameValue;
-            string scenesFolderDir = "Assets/" + GameLevelToolkit.GetProjectPathStringWithSlash() + "Scenes/" + SceneAndResourceFolderName.folderNameValue;
+            string resourcesFolderDir = "Assets/" + GameLevelToolkitWindow.GetProjectPathStringWithSlash() + "Resources/" + SceneAndResourceFolderName.folderNameValue;
+            string scenesFolderDir = "Assets/" + GameLevelToolkitWindow.GetProjectPathStringWithSlash() + "Scenes/" + SceneAndResourceFolderName.folderNameValue;
             //Destroy Resources
             FileUtil.DeleteFileOrDirectory(resourcesFolderDir);
             FileUtil.DeleteFileOrDirectory(resourcesFolderDir + ".meta");
@@ -36,9 +36,9 @@ namespace IND.Editor.GameLevelsToolkit
             FileUtil.DeleteFileOrDirectory(scenesFolderDir);
             FileUtil.DeleteFileOrDirectory(scenesFolderDir + ".meta");
 
-            if (GameLevelToolkit.toolkitWindow != null)
+            if (GameLevelToolkitWindow.toolkitWindow != null)
             {
-                GameLevelToolkit.toolkitWindow.initialDataHasBeenCreated = false;
+                GameLevelToolkitWindow.toolkitWindow.initialDataHasBeenCreated = false;
             }
 
             Debug.Log("Successful Uninstall");

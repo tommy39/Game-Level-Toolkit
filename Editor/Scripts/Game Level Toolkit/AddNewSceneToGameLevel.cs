@@ -85,8 +85,8 @@ namespace IND.Editor.GameLevelsToolkit
                 return;
             }
 
-            GameLevelToolkit toolkit = GameLevelToolkit.GetRefreshedToolkitWindow();
-            string targetSceneFolderPath = GameLevelToolkit.GetProjectPathStringWithSlash();
+            GameLevelToolkitWindow toolkit = GameLevelToolkitWindow.GetRefreshedToolkitWindow();
+            string targetSceneFolderPath = GameLevelToolkitWindow.GetProjectPathStringWithSlash();
 
 
             //Check If scene Already Exists

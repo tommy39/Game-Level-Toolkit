@@ -23,7 +23,7 @@ namespace IND.Editor.GameLevelsToolkit
         public static void OpenMenu()
         {
             window = (CreateNewGameLevelMenu)GetWindow(typeof(CreateNewGameLevelMenu));
-            window.gameLevelData = GameLevelToolkit.GetGameLevelsData();
+            window.gameLevelData = GameLevelToolkitWindow.GetGameLevelsData();
         }
 
         private void OnGUI()
@@ -126,8 +126,8 @@ namespace IND.Editor.GameLevelsToolkit
 
         private void CreateLevel()
         {
-            GameLevelToolkit toolkit = GameLevelToolkit.GetRefreshedToolkitWindow();
-            string projectPathName = GameLevelToolkit.GetProjectPathStringWithSlash();                      
+            GameLevelToolkitWindow toolkit = GameLevelToolkitWindow.GetRefreshedToolkitWindow();
+            string projectPathName = GameLevelToolkitWindow.GetProjectPathStringWithSlash();                      
 
             //Check If the Location Already Exists
             GameLevel existingLocation = (GameLevel)AssetDatabase.LoadAssetAtPath("Assets/" + projectPathName + "Resources/" + SceneAndResourceFolderName.folderNameValue + "/" + gameLevelName + "/" + gameLevelName + ".asset", typeof(GameLevel));
@@ -181,7 +181,7 @@ namespace IND.Editor.GameLevelsToolkit
             GameLevel createdGameLevel = (GameLevel)AssetDatabase.LoadAssetAtPath("Assets/" + projectPathName + "Resources/" + SceneAndResourceFolderName.folderNameValue + "/Existing " + SceneAndResourceFolderName.folderNameValue + "/" + gameLevelName + ".asset", typeof(GameLevel));
             createdGameLevel.gameLevelName = gameLevelName;
             createdGameLevel.assignedScenesDirectory = "Assets/" + projectPathName + "Scenes/" + SceneAndResourceFolderName.folderNameValue + "/" + gameLevelName;
-            GameLevelToolkit.GetGameLevelsData().gameLevelsCreatedByUser.Add(createdGameLevel);
+            GameLevelToolkitWindow.GetGameLevelsData().gameLevelsCreatedByUser.Add(createdGameLevel);
             EditorUtility.SetDirty(createdGameLevel); 
 
             for (int i = 0; i < scenesToCreateInGameLevel.Count; i++)

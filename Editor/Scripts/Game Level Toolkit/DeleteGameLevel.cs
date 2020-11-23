@@ -70,7 +70,7 @@ public class DeleteGameLevel : EditorWindow
         if (ignoreDependencies == false)
         {
             bool hasDependency = false;
-            GameLevelData gameLevelsData = GameLevelToolkit.GetRefreshedToolkitWindow().gameLevelsData;
+            GameLevelData gameLevelsData = GameLevelToolkitWindow.GetRefreshedToolkitWindow().gameLevelsData;
             for (int i = 0; i < gameLevelsData.gameLevelsCreatedByUser.Count; i++)
             {
                 for (int g = 0; g < gameLevelsData.gameLevelsCreatedByUser[i].levelDependencies.Count; g++)
@@ -96,10 +96,10 @@ public class DeleteGameLevel : EditorWindow
         FileUtil.DeleteFileOrDirectory(gameLevelToDelete.assignedScenesDirectory + ".meta");
 
         //Remove Location From LocationData
-        GameLevelToolkit.GetGameLevelsData().gameLevelsCreatedByUser.Remove(gameLevelToDelete);
+        GameLevelToolkitWindow.GetGameLevelsData().gameLevelsCreatedByUser.Remove(gameLevelToDelete);
 
-        GameLevelToolkit toolkit = GameLevelToolkit.GetRefreshedToolkitWindow();
-        string projectPath = GameLevelToolkit.GetProjectPathStringWithSlash();
+        GameLevelToolkitWindow toolkit = GameLevelToolkitWindow.GetRefreshedToolkitWindow();
+        string projectPath = GameLevelToolkitWindow.GetProjectPathStringWithSlash();
 
 
         //Delete Locations Resource Folder

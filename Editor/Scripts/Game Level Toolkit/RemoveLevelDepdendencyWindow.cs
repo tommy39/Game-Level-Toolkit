@@ -79,6 +79,7 @@ namespace IND.Editor.GameLevelsToolkit
                 levelsToString.Add(item.gameLevelName);
             }
             targetDependenciesOptions = levelsToString.ToArray();
+
         }
     }
 }

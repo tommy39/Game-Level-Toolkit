@@ -10,7 +10,7 @@ namespace IND.Editor.GameLevelsToolkit
     {
         public static void RefreshLevelsList(out string[] levelOptionsToLoad, out int selectedValue, out GameLevel[] levels, out GameLevelData gameLevelData)
         {
-            gameLevelData = GameLevelToolkit.GetGameLevelsData();
+            gameLevelData = GameLevelToolkitWindow.GetGameLevelsData();
             selectedValue = 0;
             levels = gameLevelData.gameLevelsCreatedByUser.ToArray();
             List<string> levelsToString = new List<string>();

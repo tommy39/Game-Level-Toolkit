@@ -10,8 +10,8 @@ namespace IND.Editor.GameLevelsToolkit
     {
         public static bool ReturnBool(string locationName)
         {
-            GameLevelToolkit toolkit = GameLevelToolkit.GetRefreshedToolkitWindow();
-            string projectPathName = GameLevelToolkit.GetProjectPathStringWithSlash();
+            GameLevelToolkitWindow toolkit = GameLevelToolkitWindow.GetRefreshedToolkitWindow();
+            string projectPathName = GameLevelToolkitWindow.GetProjectPathStringWithSlash();
 
             GameLevel existingGameLevel = (GameLevel)AssetDatabase.LoadAssetAtPath("Assets/" + projectPathName + "/Resources/" + SceneAndResourceFolderName.folderNameValue + "/" + locationName + "/" + locationName + ".asset", typeof(GameLevel));
             if (existingGameLevel != null)
@@ -24,8 +24,8 @@ namespace IND.Editor.GameLevelsToolkit
 
         public static GameLevel ReturnGameLevel(string locationName)
         {
-            GameLevelToolkit toolkit = GameLevelToolkit.GetRefreshedToolkitWindow();
-            string projectPathName = GameLevelToolkit.GetProjectPathStringWithSlash();
+            GameLevelToolkitWindow toolkit = GameLevelToolkitWindow.GetRefreshedToolkitWindow();
+            string projectPathName = GameLevelToolkitWindow.GetProjectPathStringWithSlash();
 
             GameLevel existingGameLevel = (GameLevel)AssetDatabase.LoadAssetAtPath("Assets/" + projectPathName + "/Resources/" + SceneAndResourceFolderName.folderNameValue + "/" + locationName + "/" + locationName + ".asset", typeof(GameLevel));
             if (existingGameLevel != null)
@@ -38,8 +38,8 @@ namespace IND.Editor.GameLevelsToolkit
 
         public static GameLevel ReturnLocationFromDirectory(string directory)
         {
-            GameLevelToolkit toolkit = GameLevelToolkit.GetRefreshedToolkitWindow();
-            string projectPathName = GameLevelToolkit.GetProjectPathStringWithSlash();
+            GameLevelToolkitWindow toolkit = GameLevelToolkitWindow.GetRefreshedToolkitWindow();
+            string projectPathName = GameLevelToolkitWindow.GetProjectPathStringWithSlash();
 
             GameLevel existingGameLevel = (GameLevel)AssetDatabase.LoadAssetAtPath("Assets/" + projectPathName + "/Resources/" + SceneAndResourceFolderName.folderNameValue + "/" + directory + "/" + directory + ".asset", typeof(GameLevel));
             return null;

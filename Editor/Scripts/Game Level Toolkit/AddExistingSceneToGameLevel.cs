@@ -48,7 +48,7 @@ namespace IND.Editor.GameLevelsToolkit
 
         private void AddSceneToLocation()
         {
-            string projectPathName = GameLevelToolkit.GetProjectPathStringWithSlash();
+            string projectPathName = GameLevelToolkitWindow.GetProjectPathStringWithSlash();
 
             if (targetGameLevel == null)
             {
@@ -69,7 +69,7 @@ namespace IND.Editor.GameLevelsToolkit
             //Check to See If the scene belongs to an existing location
             bool sceneExistsInAGameLevel = false;
             string sceneNameWithoutGameLevelPrefix = null;
-            GameLevelData gameLevelData = GameLevelToolkit.GetGameLevelsData();
+            GameLevelData gameLevelData = GameLevelToolkitWindow.GetGameLevelsData();
             for (int i = 0; i < gameLevelData.gameLevelsCreatedByUser.Count; i++)
             {
                 for (int g = 0; g < gameLevelData.gameLevelsCreatedByUser[i].assignedScenes.Count; g++)

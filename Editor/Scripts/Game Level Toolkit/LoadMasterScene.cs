@@ -36,7 +36,7 @@ namespace IND.Editor.GameLevelsToolkit
             Scene[] loadedScenesArray = loadedScenes.ToArray();
             EditorSceneManager.SaveModifiedScenesIfUserWantsTo(loadedScenesArray);
 
-            string scenePath = "Assets/" + GameLevelToolkit.GetProjectPathStringWithSlash() + "Scenes/" + SceneAndResourceFolderName.folderNameValue + "/Master Scene/Master Scene.unity";
+            string scenePath = "Assets/" + GameLevelToolkitWindow.GetProjectPathStringWithSlash() + "Scenes/" + SceneAndResourceFolderName.folderNameValue + "/Master Scene/Master Scene.unity";
             if (openAdditively == true)
             {
                 EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Additive);

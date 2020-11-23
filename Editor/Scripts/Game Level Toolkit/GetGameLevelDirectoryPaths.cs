@@ -10,8 +10,8 @@ namespace IND.Editor.GameLevelsToolkit
     {
         public static string GetGameLevelScenesFolder(string locationName, bool includeSlashEnding = false)
         {
-            GameLevelToolkit toolkit = GameLevelToolkit.GetRefreshedToolkitWindow();
-            string projectDirectory = GameLevelToolkit.GetProjectPathStringWithSlash();
+            GameLevelToolkitWindow toolkit = GameLevelToolkitWindow.GetRefreshedToolkitWindow();
+            string projectDirectory = GameLevelToolkitWindow.GetProjectPathStringWithSlash();
 
             string targetDirectory = "Assets/" + projectDirectory + "Scenes/" + SceneAndResourceFolderName.folderNameValue + "/" + locationName;
             if (includeSlashEnding == true)
@@ -23,8 +23,8 @@ namespace IND.Editor.GameLevelsToolkit
 
         public static string GetGameLevelResourceFolder(string locationName, bool includeSlashEnding = false)
         {
-            GameLevelToolkit toolkit = GameLevelToolkit.GetRefreshedToolkitWindow();
-            string projectDirectory = GameLevelToolkit.GetProjectPathStringWithSlash();
+            GameLevelToolkitWindow toolkit = GameLevelToolkitWindow.GetRefreshedToolkitWindow();
+            string projectDirectory = GameLevelToolkitWindow.GetProjectPathStringWithSlash();
 
             string targetDirectory = "Assets/" + projectDirectory + "Resources/" + SceneAndResourceFolderName.folderNameValue + "/" + locationName;
             if (includeSlashEnding == true)
@@ -36,8 +36,8 @@ namespace IND.Editor.GameLevelsToolkit
 
         public static string GetGameLevelAssetFileDirectory(GameLevel level)
         {
-            GameLevelToolkit toolkit = GameLevelToolkit.GetRefreshedToolkitWindow();
-            string projectDirectory = GameLevelToolkit.GetProjectPathStringWithSlash();
+            GameLevelToolkitWindow toolkit = GameLevelToolkitWindow.GetRefreshedToolkitWindow();
+            string projectDirectory = GameLevelToolkitWindow.GetProjectPathStringWithSlash();
 
             string gameLevelDirectory = "Assets/" + projectDirectory + "Resources/" + SceneAndResourceFolderName.folderNameValue + "/" + "Existing " + SceneAndResourceFolderName.folderNameValue+ "/" + level.name + ".asset";
             return gameLevelDirectory;

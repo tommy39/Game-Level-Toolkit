@@ -12,7 +12,7 @@ namespace IND.Editor.GameLevelsToolkit
     {
         public static Scene CreateEmptyScene(string sceneName, string parentFolderName)
         {
-            GameLevelToolkit toolkit = GameLevelToolkit.GetRefreshedToolkitWindow();
+            GameLevelToolkitWindow toolkit = GameLevelToolkitWindow.GetRefreshedToolkitWindow();
             string projectDirectory = null;
             if (toolkit.settings == null)
             {
@@ -20,7 +20,7 @@ namespace IND.Editor.GameLevelsToolkit
             }
             else
             {
-                projectDirectory = GameLevelToolkit.GetProjectPathStringWithSlash();
+                projectDirectory = GameLevelToolkitWindow.GetProjectPathStringWithSlash();
             }
 
             if (!Directory.Exists("Assets/" + projectDirectory + "Scenes/" + SceneAndResourceFolderName.folderNameValue + "/" + parentFolderName))

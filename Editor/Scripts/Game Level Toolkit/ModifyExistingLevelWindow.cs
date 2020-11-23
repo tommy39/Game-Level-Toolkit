@@ -60,6 +60,16 @@ namespace IND.Editor.GameLevelsToolkit
             {
                 RemoveLevelDepdendencyWindow.OpenMenu();
             }
+
+            if (GUILayout.Button("Add a Dependency to a Level"))
+            {
+                AddDependencyToLevelWindow.OpenMenu();
+            }
+
+            if(GUILayout.Button("Add A Level to Scenes Build Index"))
+            {
+                AddLevelToBuildWindow.OpenMenu();
+            }
         }
 
         private void DeleteExistingLevel()
