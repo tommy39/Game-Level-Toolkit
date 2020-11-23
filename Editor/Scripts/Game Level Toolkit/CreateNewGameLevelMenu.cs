@@ -11,26 +11,45 @@ namespace IND.Editor.GameLevelsToolkit
 {
     public class CreateNewGameLevelMenu : EditorWindow
     {
-        public static CreateNewGameLevelMenu createNewLocationWindow;
+        public static CreateNewGameLevelMenu window;
 
         public string gameLevelName;
         public List<NewGameLevelScene> scenesToCreateInGameLevel = new List<NewGameLevelScene>();
         public List<GameLevel> gameLevelDependencies = new List<GameLevel>();
         private bool hasEmptySceneName = false;
         private bool hasEmptyDependency = false;
+        private GameLevelData gameLevelData;
 
         public static void OpenMenu()
         {
-            createNewLocationWindow = (CreateNewGameLevelMenu)GetWindow(typeof(CreateNewGameLevelMenu));
+            window = (CreateNewGameLevelMenu)GetWindow(typeof(CreateNewGameLevelMenu));
+            window.gameLevelData = GameLevelToolkit.GetGameLevelsData();
         }
 
         private void OnGUI()
         {
+            bool doesLevelNameExist = false;
+            for (int i = 0; i < gameLevelData.gameLevelsCreatedByUser.Count; i++)
+            {
+                if (gameLevelData.gameLevelsCreatedByUser[i].gameLevelName == gameLevelName)
+                {
+                    doesLevelNameExist = true;
+                    break;
+                }
+                else
+                {
+                    doesLevelNameExist = false;
+                }
+            }
     
             gameLevelName = EditorGUILayout.TextField("New Level Name", gameLevelName);
             if (gameLevelName == null || gameLevelName == "")
             {
                 EditorGUILayout.HelpBox("Game Level Name Cannot Be Empty", MessageType.Error);
+            }
+            if(doesLevelNameExist == true)
+            {
+                EditorGUILayout.HelpBox("Game Level Already Exists", MessageType.Error);
             }
             if (scenesToCreateInGameLevel.Count == 0)
             {
@@ -96,7 +115,7 @@ namespace IND.Editor.GameLevelsToolkit
                 EditorGUILayout.HelpBox("Dependency value cannot be null", MessageType.Error);
             }
 
-            if (gameLevelName != null && gameLevelName != "" && hasEmptySceneName == false && hasEmptyDependency == false)
+            if (gameLevelName != null && gameLevelName != "" && hasEmptySceneName == false && hasEmptyDependency == false && doesLevelNameExist == false && scenesToCreateInGameLevel.Count > 0)
             {
                 if (GUILayout.Button("Create Level"))
                 {

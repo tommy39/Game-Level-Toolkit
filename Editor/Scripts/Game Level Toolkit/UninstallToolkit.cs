@@ -36,9 +36,6 @@ namespace IND.Editor.GameLevelsToolkit
             FileUtil.DeleteFileOrDirectory(scenesFolderDir);
             FileUtil.DeleteFileOrDirectory(scenesFolderDir + ".meta");
 
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
-
             if (GameLevelToolkit.toolkitWindow != null)
             {
                 GameLevelToolkit.toolkitWindow.initialDataHasBeenCreated = false;

@@ -31,12 +31,32 @@ namespace IND.Editor.GameLevelsToolkit
             selectedValue = EditorGUILayout.Popup("Level To Create Duplicate Of", selectedValue, levelOptions);
             selectedGameLevel = levels[selectedValue];
             sceneNameToCreate = EditorGUILayout.TextField("New Scene Name", sceneNameToCreate);
+
+            bool hasExistingSceneName = false;
+            for (int i = 0; i < selectedGameLevel.assignedScenes.Count; i++)
+            {
+                if (selectedGameLevel.assignedScenes[i] == sceneNameToCreate)
+                {
+                    hasExistingSceneName = true;
+                    break;
+                }
+                else
+                {
+                    hasExistingSceneName = false;
+                }
+            }
+
+            if(hasExistingSceneName == true)
+            {
+                EditorGUILayout.HelpBox("Scene Name Already Exists in Level", MessageType.Error);
+            }
+
             if (string.IsNullOrEmpty(sceneNameToCreate)) 
             {
                 EditorGUILayout.HelpBox("Name of new Level cannot be empty", MessageType.Error);
             }         
 
-            if (!string.IsNullOrEmpty(sceneNameToCreate))
+            if (!string.IsNullOrEmpty(sceneNameToCreate) && hasExistingSceneName == false)
             {
                 if (GUILayout.Button("Add Scene"))
                 {
