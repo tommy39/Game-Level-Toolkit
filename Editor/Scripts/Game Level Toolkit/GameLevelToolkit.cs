@@ -13,8 +13,6 @@ namespace IND.Editor.GameLevelsToolkit
         // [HideIf("initialDataHasBeenCreated")]
         public bool initialDataHasBeenCreated = false;
 
-        private bool showModifyLevelGroup = false;
-
         // [ShowIf("initialDataHasBeenCreated")] [InlineEditor] 
         public GameLevelData gameLevelsData;
         private Object levelsDataObj;
@@ -85,6 +83,12 @@ namespace IND.Editor.GameLevelsToolkit
                 {
                     LoadGameLevel();
                 }
+
+                if(GUILayout.Button ("Load Master Scene"))
+                {
+                    LoadMasterScene.OpenMenu();
+                }    
+
                 if (GUILayout.Button("Create New Level"))
                 {
                     CreateNewLevel();
