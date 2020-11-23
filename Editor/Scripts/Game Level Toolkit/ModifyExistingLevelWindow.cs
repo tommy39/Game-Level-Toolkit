@@ -55,6 +55,11 @@ namespace IND.Editor.GameLevelsToolkit
             {
                 DecoupleSceneFromLevel();
             }
+
+            if(GUILayout.Button("Remove a Dependency From Level"))
+            {
+                RemoveLevelDepdendencyWindow.OpenMenu();
+            }
         }
 
         private void DeleteExistingLevel()
