@@ -48,10 +48,6 @@ namespace IND.Editor.GameLevelsToolkit
             includeDependencies = EditorGUILayout.Toggle("Load Dependencies", includeDependencies);
             keepCurrentScenesThatAreOpenOpeneded = EditorGUILayout.Toggle("Keep Current Open Scenes Opened", keepCurrentScenesThatAreOpenOpeneded);
 
-            Debug.Log(gameLevelData);
-            Debug.Log(levels.Length);
-            Debug.Log(levels[0].gameLevelName);
-
             if (GUILayout.Button("Load Seleected Level"))
             {
                 // Get Target Level
@@ -68,7 +64,16 @@ namespace IND.Editor.GameLevelsToolkit
         }
 
         public static void OpenLevel(GameLevel targetGameLevel, bool includeMasterScene, bool keepCurrentScenesThatAreOpenOpeneded, bool includeDependencies)
-        {
+        { 
+
+            List<Scene> loadedScenes = new List<Scene>();
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+            {
+                loadedScenes.Add(SceneManager.GetSceneAt(i));
+            }
+            Scene[] loadedScenesArray = loadedScenes.ToArray();
+            EditorSceneManager.SaveModifiedScenesIfUserWantsTo(loadedScenesArray);
+
             //Load The Master Scene
             if (includeMasterScene == true)
             {

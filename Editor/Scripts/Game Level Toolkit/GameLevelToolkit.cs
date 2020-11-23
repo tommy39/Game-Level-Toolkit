@@ -34,6 +34,7 @@ namespace IND.Editor.GameLevelsToolkit
         private static void OpenToolkitWindow()
         {
             toolkitWindow = GetRefreshedToolkitWindow();
+            OnEditorQuit();
         }
 
         public static GameLevelToolkit GetRefreshedToolkitWindow()
@@ -290,6 +291,10 @@ namespace IND.Editor.GameLevelsToolkit
                 pathName = toolkit.settings.projectDirectoryPathName + "/";
             }
             return pathName;
+        }
+        static void OnEditorQuit()
+        {
+            EditorApplication.quitting += toolkitWindow.Close;
         }
     }
 }
