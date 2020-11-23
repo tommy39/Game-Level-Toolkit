@@ -56,11 +56,14 @@ public class DeleteGameLevel : EditorWindow
 
     private void DeleteLevel()
     {
-        if (gameLevelToDelete == null)
+        if (gameLevelToDelete == null ||string.IsNullOrEmpty(gameLevelToDelete.gameLevelName))
         {
-            Debug.LogError("Requires a Location To Delete");
+            Debug.LogError("Requires a Level To Delete");
             return;
         }
+
+
+
         gameLevelsThatAreDependantOnThisGameLevel.Clear();
 
         //Check If any locations are dependant on  this location
@@ -103,7 +106,7 @@ public class DeleteGameLevel : EditorWindow
         string resourceDirectory = "Assets/" + projectPath + "Resources/" + SceneAndResourceFolderName.folderNameValue + "/Existing " + SceneAndResourceFolderName.folderNameValue + "/" + gameLevelToDelete.gameLevelName + ".asset";
         FileUtil.DeleteFileOrDirectory(resourceDirectory);
         FileUtil.DeleteFileOrDirectory(resourceDirectory + ".meta");
-
+        EditorUtility.SetDirty(toolkit.gameLevelsData);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }

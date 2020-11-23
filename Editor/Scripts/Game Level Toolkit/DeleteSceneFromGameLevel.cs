@@ -96,6 +96,7 @@ namespace IND.Editor.GameLevelsToolkit
             }
 
             selectedGameLevel.assignedScenes.Remove(selectedSceneToDestroy);
+            EditorUtility.SetDirty(selectedGameLevel);
             FileUtil.DeleteFileOrDirectory(targetSceneFile);
             FileUtil.DeleteFileOrDirectory(targetSceneFile + ".meta");
             selectedSceneToDestroy = selectedGameLevel.assignedScenes[0];

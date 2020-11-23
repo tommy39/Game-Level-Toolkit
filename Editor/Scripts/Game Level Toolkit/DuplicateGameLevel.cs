@@ -108,6 +108,9 @@ namespace IND.Editor.GameLevelsToolkit
                 FileUtil.CopyFileOrDirectory(sceneToCopy, destination);
             }
 
+            EditorUtility.SetDirty(createdGameLevel);
+            EditorUtility.SetDirty(toolkit.gameLevelsData);
+
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }

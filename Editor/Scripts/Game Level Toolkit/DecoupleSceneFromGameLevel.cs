@@ -92,6 +92,7 @@ namespace IND.Editor.GameLevelsToolkit
             FileUtil.MoveFileOrDirectory(fileToPathToMove + ".meta", "Assets/" + targetFolderToDumpSceneIn + targetSceneToDecouple + ".unity" + ".meta");
 
             selectedGameLevel.assignedScenes.Remove(targetSceneToDecouple);
+            EditorUtility.SetDirty(selectedGameLevel);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }

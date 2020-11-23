@@ -251,6 +251,11 @@ namespace IND.Editor.GameLevelsToolkit
                 Scene masterScene = CreateScene.CreateEmptyScene("Master Scene", "Master Scene");
             }
 
+            EditorUtility.SetDirty(toolkit.settings);
+            EditorUtility.SetDirty(toolkit.gameLevelsData);
+
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
 
             initialDataHasBeenCreated = true;
         }

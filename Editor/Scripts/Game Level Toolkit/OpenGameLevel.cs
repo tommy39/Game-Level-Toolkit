@@ -43,11 +43,14 @@ namespace IND.Editor.GameLevelsToolkit
 
         private void OnGUI()
         {
-            selectedValue = EditorGUILayout.Popup("Label", selectedValue, levelOptionsToLoad);
+            selectedValue = EditorGUILayout.Popup("Level To Load", selectedValue, levelOptionsToLoad);
             includeMasterScene = EditorGUILayout.Toggle("Load Master Scene", includeMasterScene);
             includeDependencies = EditorGUILayout.Toggle("Load Dependencies", includeDependencies);
             keepCurrentScenesThatAreOpenOpeneded = EditorGUILayout.Toggle("Keep Current Open Scenes Opened", keepCurrentScenesThatAreOpenOpeneded);
 
+            Debug.Log(gameLevelData);
+            Debug.Log(levels.Length);
+            Debug.Log(levels[0].gameLevelName);
 
             if (GUILayout.Button("Load Seleected Level"))
             {
@@ -55,7 +58,7 @@ namespace IND.Editor.GameLevelsToolkit
                 selectedGameLevel = levels[selectedValue];
 
                 OpenLevel(selectedGameLevel, includeMasterScene, keepCurrentScenesThatAreOpenOpeneded, includeDependencies);
-                this.Close();
+                Close();
             }
         }
 

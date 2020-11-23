@@ -133,6 +133,9 @@ namespace IND.Editor.GameLevelsToolkit
                 toolkit.settings.projectDirectoryPathName = targetDirectoryToMoveToo;
             }
 
+            EditorUtility.SetDirty(toolkit.settings);
+            EditorUtility.SetDirty(toolkit.gameLevelsData);
+
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
 

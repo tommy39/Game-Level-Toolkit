@@ -108,7 +108,7 @@ namespace IND.Editor.GameLevelsToolkit
         private void CreateLevel()
         {
             GameLevelToolkit toolkit = GameLevelToolkit.GetRefreshedToolkitWindow();
-            string projectPathName = GameLevelToolkit.GetProjectPathStringWithSlash();
+            string projectPathName = GameLevelToolkit.GetProjectPathStringWithSlash();                      
 
             //Check If the Location Already Exists
             GameLevel existingLocation = (GameLevel)AssetDatabase.LoadAssetAtPath("Assets/" + projectPathName + "Resources/" + SceneAndResourceFolderName.folderNameValue + "/" + gameLevelName + "/" + gameLevelName + ".asset", typeof(GameLevel));
@@ -163,6 +163,7 @@ namespace IND.Editor.GameLevelsToolkit
             createdGameLevel.gameLevelName = gameLevelName;
             createdGameLevel.assignedScenesDirectory = "Assets/" + projectPathName + "Scenes/" + SceneAndResourceFolderName.folderNameValue + "/" + gameLevelName;
             GameLevelToolkit.GetGameLevelsData().gameLevelsCreatedByUser.Add(createdGameLevel);
+            EditorUtility.SetDirty(createdGameLevel); 
 
             for (int i = 0; i < scenesToCreateInGameLevel.Count; i++)
             {
@@ -173,6 +174,7 @@ namespace IND.Editor.GameLevelsToolkit
             {
                 createdGameLevel.levelDependencies.Add(gameLevelDependencies[i]);
             }
+            EditorUtility.SetDirty(toolkit.gameLevelsData);
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();

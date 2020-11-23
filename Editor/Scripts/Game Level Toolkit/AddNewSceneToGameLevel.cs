@@ -80,6 +80,7 @@ namespace IND.Editor.GameLevelsToolkit
             CreateScene.CreateEmptyScene(selectedGameLevel.gameLevelName + "_" + sceneNameToCreate, selectedGameLevel.gameLevelName);
 
             selectedGameLevel.assignedScenes.Add(sceneNameToCreate);
+            EditorUtility.SetDirty(selectedGameLevel);
 
             OpenGameLevel.OpenLevel(selectedGameLevel, true, false, true);
         }

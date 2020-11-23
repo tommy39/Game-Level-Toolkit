@@ -96,6 +96,7 @@ namespace IND.Editor.GameLevelsToolkit
             string newNameWithPrefix = gameLevelData.gameLevelName + "_" + newName + ".unity";
 
             string adjustedName = AssetDatabase.RenameAsset(originalPathToScene, newNameWithPrefix);
+            EditorUtility.SetDirty(gameLevelData);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             gameLevelData.assignedScenes[indexOfSceneName] = newName;
@@ -114,6 +115,7 @@ namespace IND.Editor.GameLevelsToolkit
 
             string adjustedName = AssetDatabase.RenameAsset(originalPathToScene, newNameWithPrefix);
             Debug.Log(adjustedName);
+            EditorUtility.SetDirty(newGameLevelData);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             Debug.Log(newName);

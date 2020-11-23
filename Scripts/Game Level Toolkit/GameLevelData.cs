@@ -1,22 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using UnityEditor;
 
 namespace IND.Core.GameLevels
 {
+    [Serializable]
     public class GameLevelData : ScriptableObject
     {
         public List<GameLevel> gameLevelsCreatedByUser = new List<GameLevel>();
-        [HideInInspector] public bool initialDataHasBeenCreated = true;        
-        public void CheckForNullLocations()
+        [HideInInspector] public bool initialDataHasBeenCreated = true;
+
+        private void OnEnable()
         {
-            for (int i = 0; i < gameLevelsCreatedByUser.Count; i++)
-            {
-                if(gameLevelsCreatedByUser[i] ==null)
-                {
-                    gameLevelsCreatedByUser.Remove(gameLevelsCreatedByUser[i]);
-                }
-            }
+            EditorUtility.ClearDirty(this);
         }
     }
 }

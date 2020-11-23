@@ -103,6 +103,7 @@ namespace IND.Editor.GameLevelsToolkit
             }
             //Rename Scriptable object Location
             AssetDatabase.RenameAsset(GetGameLevelDirectoryPaths.GetGameLevelAssetFileDirectory(selectedGameLevel), newGameLevelName + ".asset");
+            EditorUtility.SetDirty(selectedGameLevel);
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
