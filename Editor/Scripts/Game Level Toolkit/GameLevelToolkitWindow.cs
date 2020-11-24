@@ -63,6 +63,12 @@ namespace IND.Editor.GameLevelsToolkit
         {
             if (initialDataHasBeenCreated == false)
             {
+                useRootProjectDirectoryPath = EditorGUILayout.Toggle("Use Root Directory For Install", useRootProjectDirectoryPath);
+                if (useRootProjectDirectoryPath == false)
+                {
+                    projectDirectoryPathName = EditorGUILayout.TextField("Target Install Directory", projectDirectoryPathName);
+                }
+
                 if (GUILayout.Button("Install Game Level Toolkit"))
                 {
                     CreateRequiredInitialData();
@@ -94,7 +100,7 @@ namespace IND.Editor.GameLevelsToolkit
                     ModifyExistingLevelWindow.OpenMenu();
                 }
 
-                if(GUILayout.Button("Modify Categories"))
+                if (GUILayout.Button("Modify Categories"))
                 {
                     CategoriesWindow.OpenMenu();
                 }
