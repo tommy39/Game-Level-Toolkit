@@ -53,7 +53,7 @@ namespace IND.Editor.GameLevelsToolkit
 
             selectedSceneToDestroy = sceneOptions[selectedSceneValue];
 
-            if(GUILayout.Button("Delete Scene From Selected Level"))
+            if (GUILayout.Button("Delete Scene From Selected Level"))
             {
                 RemoveScene();
                 WindowRefresh.RefreshScenesList(selectedGameLevel, out sceneOptions, out selectedSceneValue);
@@ -94,6 +94,11 @@ namespace IND.Editor.GameLevelsToolkit
                 Debug.LogError("Cannot Delete Last Scene in a location, a location required at least one scene, delete the location if you want otherwise");
                 return;
             }
+
+            //Remove From Build
+            EditorBuildSettingsScene scene = new EditorBuildSettingsScene(targetSceneFile, true);
+            BuildSettingsSceneManagement.RemoveSceneFromBuild(scene, null, false, true);
+
 
             selectedGameLevel.assignedScenes.Remove(selectedSceneToDestroy);
             EditorUtility.SetDirty(selectedGameLevel);

@@ -3,6 +3,7 @@ using UnityEditor;
 using System.IO;
 using IND.Core.GameLevels;
 using UnityEngine.SceneManagement;
+using UnityEditor.SceneManagement;
 
 namespace IND.Editor.GameLevelsToolkit
 {
@@ -78,23 +79,23 @@ namespace IND.Editor.GameLevelsToolkit
             {
                 settingsObj = EditorGUILayout.ObjectField(settingsObj, typeof(ScriptableObject), true);
                 levelsDataObj = EditorGUILayout.ObjectField(levelsDataObj, typeof(ScriptableObject), true);
-               
+
                 if (GUILayout.Button("Load Level"))
                 {
                     LoadGameLevel();
                 }
 
-                if(GUILayout.Button ("Load Master Scene"))
+                if (GUILayout.Button("Load Master Scene"))
                 {
                     LoadMasterScene.OpenMenu();
-                }    
+                }
 
                 if (GUILayout.Button("Create New Level"))
                 {
                     CreateNewLevel();
                 }
-                
-                if(GUILayout.Button("Modify Existing Level"))
+
+                if (GUILayout.Button("Modify Existing Level"))
                 {
                     ModifyExistingLevelWindow.OpenMenu();
                 }
@@ -252,8 +253,9 @@ namespace IND.Editor.GameLevelsToolkit
             if (!Directory.Exists("Assets/" + projectPathName + "Scenes/" + SceneAndResourceFolderName.folderNameValue + "/MasterScene"))
             {
                 //Create Master Scene Directory
-                string resourcesDirectory = AssetDatabase.CreateFolder("Assets/" + projectPathName + "Scenes/" + SceneAndResourceFolderName.folderNameValue, "Master Scene");
+                string dir = AssetDatabase.CreateFolder("Assets/" + projectPathName + "Scenes/" + SceneAndResourceFolderName.folderNameValue, "Master Scene");
                 Scene masterScene = CreateScene.CreateEmptyScene("Master Scene", "Master Scene");
+                EditorSceneManager.OpenScene("Assets/" + projectPathName + "Scenes/" + SceneAndResourceFolderName.folderNameValue + "/Master Scene/Master Scene.unity");
             }
 
             EditorUtility.SetDirty(toolkit.settings);
@@ -261,6 +263,12 @@ namespace IND.Editor.GameLevelsToolkit
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
+
+            //Setup Master Scene
+            Scene currentScene = SceneManager.GetActiveScene();
+            // GameObject geo = new GameObject();
+            GameObject go = new GameObject("Game Level Manager");
+            go.AddComponent<GameLevelManager>();
 
             initialDataHasBeenCreated = true;
         }
@@ -274,7 +282,7 @@ namespace IND.Editor.GameLevelsToolkit
         {
             CreateNewGameLevelMenu.OpenMenu();
         }
-   
+
         private void MoveInstallDirectory()
         {
             MoveGameLevelsInstallDirectory.OpenMenu();

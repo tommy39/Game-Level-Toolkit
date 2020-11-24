@@ -82,7 +82,7 @@ namespace IND.Editor.GameLevelsToolkit
             SerializedProperty dependenciesProperty = so.FindProperty("gameLevelDependencies");
             SerializedProperty scenesProperty = so.FindProperty("scenesToCreateInGameLevel");
             EditorGUILayout.PropertyField(scenesProperty, true); // True means show children
-            EditorGUILayout.PropertyField(dependenciesProperty, true); // True means show children
+            EditorGUILayout.PropertyField(dependenciesProperty, true); 
             so.ApplyModifiedProperties(); // Remember to apply modified properties
 
             if (hasEmptySceneName == true)

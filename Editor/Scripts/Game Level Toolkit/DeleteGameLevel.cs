@@ -56,7 +56,7 @@ public class DeleteGameLevel : EditorWindow
 
     private void DeleteLevel()
     {
-        if (gameLevelToDelete == null ||string.IsNullOrEmpty(gameLevelToDelete.gameLevelName))
+        if (gameLevelToDelete == null || string.IsNullOrEmpty(gameLevelToDelete.gameLevelName))
         {
             Debug.LogError("Requires a Level To Delete");
             return;
@@ -89,6 +89,17 @@ public class DeleteGameLevel : EditorWindow
                 return;
             }
         }
+        GameLevelToolkitWindow toolkit = GameLevelToolkitWindow.GetRefreshedToolkitWindow();
+        string projectPath = GameLevelToolkitWindow.GetProjectPathStringWithSlash();
+
+        //Remove From The SceneBuild
+        for (int i = 0; i < gameLevelToDelete.assignedScenes.Count; i++)
+        {
+            EditorBuildSettingsScene scene = new EditorBuildSettingsScene("Assets/" + projectPath + "Scenes/" + SceneAndResourceFolderName.folderNameValue + "/" + gameLevelToDelete.gameLevelName + "/" + gameLevelToDelete.gameLevelName + "_" + gameLevelToDelete.assignedScenes[i] + ".unity", true);
+            BuildSettingsSceneManagement.RemoveSceneFromBuild(scene, null, false, true);
+        }
+
+
 
         //Delete Locations Scene Folder
         string scenesFolderPath = gameLevelToDelete.assignedScenesDirectory + "/";
@@ -98,8 +109,6 @@ public class DeleteGameLevel : EditorWindow
         //Remove Location From LocationData
         GameLevelToolkitWindow.GetGameLevelsData().gameLevelsCreatedByUser.Remove(gameLevelToDelete);
 
-        GameLevelToolkitWindow toolkit = GameLevelToolkitWindow.GetRefreshedToolkitWindow();
-        string projectPath = GameLevelToolkitWindow.GetProjectPathStringWithSlash();
 
 
         //Delete Locations Resource Folder

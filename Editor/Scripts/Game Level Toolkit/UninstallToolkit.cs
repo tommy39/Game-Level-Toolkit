@@ -41,6 +41,8 @@ namespace IND.Editor.GameLevelsToolkit
                 GameLevelToolkitWindow.toolkitWindow.initialDataHasBeenCreated = false;
             }
 
+            AssetDatabase.Refresh();
+
             Debug.Log("Successful Uninstall");
         }
     }

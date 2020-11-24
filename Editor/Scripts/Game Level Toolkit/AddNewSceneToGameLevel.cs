@@ -12,6 +12,7 @@ namespace IND.Editor.GameLevelsToolkit
         public GameLevel selectedGameLevel;
         //[InfoBox("Must Have a Scene Name", InfoMessageType.Error, "HasSceneName")]
         public string sceneNameToCreate;
+        private bool automaticallyAddSceneToBuild = false;
 
         #region Unity GUI
         private GameLevelData gameLevelData;
@@ -31,6 +32,8 @@ namespace IND.Editor.GameLevelsToolkit
             selectedValue = EditorGUILayout.Popup("Level To Create Duplicate Of", selectedValue, levelOptions);
             selectedGameLevel = levels[selectedValue];
             sceneNameToCreate = EditorGUILayout.TextField("New Scene Name", sceneNameToCreate);
+
+            automaticallyAddSceneToBuild = EditorGUILayout.Toggle("Automatically add scene to build index", automaticallyAddSceneToBuild);
 
             bool hasExistingSceneName = false;
             for (int i = 0; i < selectedGameLevel.assignedScenes.Count; i++)
@@ -101,6 +104,38 @@ namespace IND.Editor.GameLevelsToolkit
 
             selectedGameLevel.assignedScenes.Add(sceneNameToCreate);
             EditorUtility.SetDirty(selectedGameLevel);
+
+            if(automaticallyAddSceneToBuild == true)
+            {
+                List<EditorBuildSettingsScene> editorBuildSettingsScenes = new List<EditorBuildSettingsScene>();
+
+                //Get The Existing Build List
+                foreach (EditorBuildSettingsScene item in EditorBuildSettings.scenes)
+                {
+                    editorBuildSettingsScenes.Add(item);
+                }
+
+                EditorBuildSettingsScene editorScene = new EditorBuildSettingsScene(targetSceneFile, true);
+
+                if (editorBuildSettingsScenes.Count > 0)
+                {
+                    bool masterSceneNotFoundInBuild = false;
+                    for (int i = 0; i < editorBuildSettingsScenes.Count; i++)
+                    {
+                        if (editorBuildSettingsScenes[i].path == editorScene.path)
+                        {
+                            masterSceneNotFoundInBuild = true;
+                            break;
+                        }
+                    }
+                    if (masterSceneNotFoundInBuild == false)
+                    {
+                        editorBuildSettingsScenes.Add(editorScene);
+                    }
+                }
+
+                EditorBuildSettings.scenes = editorBuildSettingsScenes.ToArray();
+            }
 
             OpenGameLevel.OpenLevel(selectedGameLevel, true, false, true);
         }

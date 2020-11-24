@@ -23,30 +23,34 @@ namespace IND.Editor.GameLevelsToolkit
         {
             window = GetWindow<AddLevelToBuildWindow>();
             WindowRefresh.RefreshLevelsList(out window.targetLevelOptions, out window.selectedLevelValue, out window.targetLevels, out window.gameLevelData);
-            window.targetLevel = window.targetLevels[window.selectedLevelValue];
+            window.FilterPotentialLevels();
+            if (window.targetLevels.Length > 0)
+            {
+                window.targetLevel = window.targetLevels[window.selectedLevelValue];
+            }
         }
 
         private void OnGUI()
         {
-            selectedLevelValue = EditorGUILayout.Popup("Selected Level", selectedLevelValue, targetLevelOptions);
-            targetLevel = targetLevels[selectedLevelValue];
-
-            if (GUILayout.Button("Add Selected Level To Build"))
+            if (targetLevels.Length > 0)
             {
-                AddSelectedLevel();
+                selectedLevelValue = EditorGUILayout.Popup("Selected Level", selectedLevelValue, targetLevelOptions);
+                targetLevel = targetLevels[selectedLevelValue];
+
+                if (GUILayout.Button("Add Selected Level To Build"))
+                {
+                    AddSelectedLevel();
+                }
+            }
+            else
+            {
+                EditorGUILayout.HelpBox("All Possible Levels have been added to the build", MessageType.Info);
             }
         }
 
         private void AddSelectedLevel()
         {
-            List<SceneAsset> sceneAssets = new List<SceneAsset>();
-            List<EditorBuildSettingsScene> editorBuildSettingsScenes = new List<EditorBuildSettingsScene>();
-
-            //Get The Existing Build List
-            foreach (EditorBuildSettingsScene item in EditorBuildSettings.scenes)
-            {
-                editorBuildSettingsScenes.Add(item);
-            }
+            List<EditorBuildSettingsScene> editorBuildSettingsScenes = BuildSettingsSceneManagement.GetEditorBuildSettingsScenes();
 
             //Add The Master Scene
             string masterscenePath = "Assets/" + GameLevelToolkitWindow.GetProjectPathStringWithSlash() + "Scenes/" + "Game Levels/Master Scene/Master Scene.unity";
@@ -102,7 +106,7 @@ namespace IND.Editor.GameLevelsToolkit
                 {
                     bool sceneExistsInBuild = false;
                     string gameLevelName = targetLevel.levelDependencies[i].gameLevelName;
-                    string scenePath = "Assets/" + GameLevelToolkitWindow.GetProjectPathStringWithSlash() + "Scenes/Game Levels/" + gameLevelName + "/" + gameLevelName + "_" + targetLevel.levelDependencies[i].assignedScenes[g] + ".unity"; EditorBuildSettingsScene scene = new EditorBuildSettingsScene(scenePath, true);
+                    string scenePath = "Assets/" + GameLevelToolkitWindow.GetProjectPathStringWithSlash() + "Scenes/Game Levels/" + gameLevelName + "/" + gameLevelName + "_" + targetLevel.levelDependencies[i].assignedScenes[g] + ".unity"; 
                     EditorBuildSettingsScene targetScene = new EditorBuildSettingsScene(scenePath, true);
 
                     for (int f = 0; f < editorBuildSettingsScenes.Count; f++)
@@ -116,7 +120,7 @@ namespace IND.Editor.GameLevelsToolkit
 
                     if (sceneExistsInBuild == false)
                     {
-                        editorBuildSettingsScenes.Add(scene);
+                        editorBuildSettingsScenes.Add(targetScene);
                     }
                 }
             }
@@ -132,7 +136,7 @@ namespace IND.Editor.GameLevelsToolkit
                     {
                         bool sceneExistsInBuild = false;
                         string gameLevelName = targetDependency.gameLevelName;
-                        string scenePath = "Assets/" + GameLevelToolkitWindow.GetProjectPathStringWithSlash() + "Scenes/Game Levels/" + gameLevelName + "/" + gameLevelName + "_" + targetDependency.assignedScenes[f] + ".unity"; EditorBuildSettingsScene scene = new EditorBuildSettingsScene(scenePath, true);
+                        string scenePath = "Assets/" + GameLevelToolkitWindow.GetProjectPathStringWithSlash() + "Scenes/Game Levels/" + gameLevelName + "/" + gameLevelName + "_" + targetDependency.assignedScenes[f] + ".unity"; 
                         EditorBuildSettingsScene targetScene = new EditorBuildSettingsScene(scenePath, true);
 
                         for (int r = 0; r < editorBuildSettingsScenes.Count; r++)
@@ -146,13 +150,68 @@ namespace IND.Editor.GameLevelsToolkit
 
                         if (sceneExistsInBuild == false)
                         {
-                            editorBuildSettingsScenes.Add(scene);
+                            editorBuildSettingsScenes.Add(targetScene);
                         }
                     }
                 }
             }
 
             EditorBuildSettings.scenes = editorBuildSettingsScenes.ToArray();
+            FilterPotentialLevels();
+        }
+
+        private void FilterPotentialLevels()
+        {
+            List<EditorBuildSettingsScene> editorBuildSettingsScenes = BuildSettingsSceneManagement.GetEditorBuildSettingsScenes();
+
+            List<GameLevel> filteredGameLevelsList = new List<GameLevel>();
+            foreach (GameLevel item in targetLevels)
+            {
+                //Get Scene and Scene Path
+                bool doesAllScenesExistInBuild = false;
+                for (int i = 0; i < item.assignedScenes.Count; i++)
+                {
+                    bool sceneExistsInBuild = false;
+                    string gameLevelName = item.gameLevelName;
+                    string scenePath = "Assets/" + GameLevelToolkitWindow.GetProjectPathStringWithSlash() + "Scenes/Game Levels/" + gameLevelName + "/" + gameLevelName + "_" + item.assignedScenes[i] + ".unity";
+                    EditorBuildSettingsScene targetScene = new EditorBuildSettingsScene(scenePath, true);
+
+                    for (int r = 0; r < editorBuildSettingsScenes.Count; r++)
+                    {
+                        if (editorBuildSettingsScenes[r].path == targetScene.path)
+                        {
+                            sceneExistsInBuild = true;                 
+                            break;
+                        }
+                    }
+
+                    if (sceneExistsInBuild == false)
+                    {
+                        doesAllScenesExistInBuild = false;
+                        break;
+                    }
+                    else
+                    {
+                        doesAllScenesExistInBuild = true;
+                    }
+                }
+
+                if(doesAllScenesExistInBuild == false)
+                {
+                    filteredGameLevelsList.Add(item);
+                }
+            }
+
+            targetLevels = filteredGameLevelsList.ToArray();
+
+            List<string> levelsToString = new List<string>();
+            foreach (GameLevel item in targetLevels)
+            {
+                levelsToString.Add(item.gameLevelName);
+            }
+            targetLevelOptions = levelsToString.ToArray();
         }
     }
+
+   
 }
