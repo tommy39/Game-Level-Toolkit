@@ -21,6 +21,12 @@ namespace IND.Editor.GameLevelsToolkit
         private bool addLevelToUnityBuildScenes = false;
         private GameLevelData gameLevelData;
 
+
+        #region unityGUI
+        private int selectedCategoryValue = 0;
+        private string[] categories;
+        #endregion
+
         public static void OpenMenu()
         {
             window = (CreateNewGameLevelMenu)GetWindow(typeof(CreateNewGameLevelMenu));
@@ -118,6 +124,9 @@ namespace IND.Editor.GameLevelsToolkit
 
             addLevelToUnityBuildScenes = GUILayout.Toggle(addLevelToUnityBuildScenes, "Add Level To Project Scene Build Settings");
 
+            categories = CategoriesManagement.GetAllCategories(false, true);
+            selectedCategoryValue = EditorGUILayout.Popup("Category To Assign Level Too", selectedCategoryValue, categories);
+
             if (gameLevelName != null && gameLevelName != "" && hasEmptySceneName == false && hasEmptyDependency == false && doesLevelNameExist == false && scenesToCreateInGameLevel.Count > 0)
             {
                 if (GUILayout.Button("Create Level"))
@@ -184,6 +193,7 @@ namespace IND.Editor.GameLevelsToolkit
             GameLevel createdGameLevel = (GameLevel)AssetDatabase.LoadAssetAtPath("Assets/" + projectPathName + "Resources/" + SceneAndResourceFolderName.folderNameValue + "/Existing " + SceneAndResourceFolderName.folderNameValue + "/" + gameLevelName + ".asset", typeof(GameLevel));
             createdGameLevel.gameLevelName = gameLevelName;
             createdGameLevel.assignedScenesDirectory = "Assets/" + projectPathName + "Scenes/" + SceneAndResourceFolderName.folderNameValue + "/" + gameLevelName;
+            createdGameLevel.assignedCategory = categories[selectedCategoryValue];
             GameLevelToolkitWindow.GetGameLevelsData().gameLevelsCreatedByUser.Add(createdGameLevel);
             EditorUtility.SetDirty(createdGameLevel); 
 

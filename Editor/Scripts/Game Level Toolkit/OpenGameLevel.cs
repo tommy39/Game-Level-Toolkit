@@ -11,10 +11,10 @@ namespace IND.Editor.GameLevelsToolkit
     public class OpenGameLevel : EditorWindow
     {
         public static OpenGameLevel window;
-       // [InlineEditor] [Required] 
+        // [InlineEditor] [Required] 
         public GameLevel selectedGameLevel;
         private GameLevelData gameLevelData;
-        
+
 
         public bool includeMasterScene = true;
         public bool includeDependencies = true;
@@ -24,6 +24,9 @@ namespace IND.Editor.GameLevelsToolkit
         private int selectedValue = 0;
         private GameLevel[] levels;
         private string[] levelOptionsToLoad;
+
+        private int selectedCategoryValue = 0;
+        private string[] categories;
         #endregion
 
 
@@ -43,18 +46,38 @@ namespace IND.Editor.GameLevelsToolkit
 
         private void OnGUI()
         {
-            selectedValue = EditorGUILayout.Popup("Level To Load", selectedValue, levelOptionsToLoad);
-            includeMasterScene = EditorGUILayout.Toggle("Load Master Scene", includeMasterScene);
-            includeDependencies = EditorGUILayout.Toggle("Load Dependencies", includeDependencies);
-            keepCurrentScenesThatAreOpenOpeneded = EditorGUILayout.Toggle("Keep Current Open Scenes Opened", keepCurrentScenesThatAreOpenOpeneded);
-
-            if (GUILayout.Button("Load Seleected Level"))
+            categories = CategoriesManagement.GetAllCategories(true, true);
+            selectedCategoryValue = EditorGUILayout.Popup("Category To Assign Level Too", selectedCategoryValue, categories);
+            levels = CategoriesManagement.GetGameLevelsBasedOnCategory(categories[selectedCategoryValue]);
+            List<string> levelsToString = new List<string>();
+            if (levels.Length > 0)
             {
-                // Get Target Level
-                selectedGameLevel = levels[selectedValue];
+                foreach (GameLevel item in levels)
+                {
+                    levelsToString.Add(item.gameLevelName);
+                }
+                levelOptionsToLoad = levelsToString.ToArray();
+            }
 
-                OpenLevel(selectedGameLevel, includeMasterScene, keepCurrentScenesThatAreOpenOpeneded, includeDependencies);
-                Close();
+            if (levels.Length > 0)
+            {
+                selectedValue = EditorGUILayout.Popup("Level To Load", selectedValue, levelOptionsToLoad);
+                includeMasterScene = EditorGUILayout.Toggle("Load Master Scene", includeMasterScene);
+                includeDependencies = EditorGUILayout.Toggle("Load Dependencies", includeDependencies);
+                keepCurrentScenesThatAreOpenOpeneded = EditorGUILayout.Toggle("Keep Current Open Scenes Opened", keepCurrentScenesThatAreOpenOpeneded);
+
+                if (GUILayout.Button("Load Seleected Level"))
+                {
+                    // Get Target Level
+                    selectedGameLevel = levels[selectedValue];
+
+                    OpenLevel(selectedGameLevel, includeMasterScene, keepCurrentScenesThatAreOpenOpeneded, includeDependencies);
+                    Close();
+                }
+            }
+            else
+            {
+                EditorGUILayout.HelpBox("Selected Category has no assigned levels", MessageType.Info);
             }
         }
 
@@ -64,7 +87,7 @@ namespace IND.Editor.GameLevelsToolkit
         }
 
         public static void OpenLevel(GameLevel targetGameLevel, bool includeMasterScene, bool keepCurrentScenesThatAreOpenOpeneded, bool includeDependencies)
-        { 
+        {
 
             List<Scene> loadedScenes = new List<Scene>();
             for (int i = 0; i < SceneManager.sceneCount; i++)

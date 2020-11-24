@@ -11,6 +11,9 @@ namespace IND.Core.GameLevels
     {
         public List<GameLevel> gameLevelsCreatedByUser = new List<GameLevel>();
         [HideInInspector] public bool initialDataHasBeenCreated = true;
+        [HideInInspector] public string allCategoriesName = "All";
+        [HideInInspector] public string unassignedCategoryName = "UnAssigned";
+        public List<string> allUserCreatedCategories = new List<string>();
 
         private void OnEnable()
         {

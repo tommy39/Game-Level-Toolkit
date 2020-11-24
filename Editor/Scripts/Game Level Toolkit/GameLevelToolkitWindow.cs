@@ -11,21 +11,15 @@ namespace IND.Editor.GameLevelsToolkit
     {
         public static GameLevelToolkitWindow toolkitWindow;
 
-        // [HideIf("initialDataHasBeenCreated")]
         public bool initialDataHasBeenCreated = false;
 
-        // [ShowIf("initialDataHasBeenCreated")] [InlineEditor] 
         public GameLevelData gameLevelsData;
         private Object levelsDataObj;
-        //  [ShowIf("initialDataHasBeenCreated")] [InlineEditor] 
         public GameLevelToolkitSettings settings;
         private Object settingsObj;
 
-        // [FoldoutGroup("Initial Setup")]
-        // [HideIf("initialDataHasBeenCreated")] 
         public bool useRootProjectDirectoryPath = true;
 
-        // [HideIf("initialDataHasBeenCreated")] [HideIf("useRootProjectDirectoryPath")] 
         public string projectDirectoryPathName = "_ProjectDirectory";
 
 
@@ -98,6 +92,11 @@ namespace IND.Editor.GameLevelsToolkit
                 if (GUILayout.Button("Modify Existing Level"))
                 {
                     ModifyExistingLevelWindow.OpenMenu();
+                }
+
+                if(GUILayout.Button("Modify Categories"))
+                {
+                    CategoriesWindow.OpenMenu();
                 }
 
                 if (GUILayout.Button("Move Install Directory"))
