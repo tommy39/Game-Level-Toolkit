@@ -18,6 +18,7 @@ namespace IND.Editor.GameLevelsToolkit
         public List<GameLevel> gameLevelDependencies = new List<GameLevel>();
         private bool hasEmptySceneName = false;
         private bool hasEmptyDependency = false;
+        private bool addLevelToUnityBuildScenes = false;
         private GameLevelData gameLevelData;
 
         public static void OpenMenu()
@@ -115,6 +116,8 @@ namespace IND.Editor.GameLevelsToolkit
                 EditorGUILayout.HelpBox("Dependency value cannot be null", MessageType.Error);
             }
 
+            addLevelToUnityBuildScenes = GUILayout.Toggle(addLevelToUnityBuildScenes, "Add Level To Project Scene Build Settings");
+
             if (gameLevelName != null && gameLevelName != "" && hasEmptySceneName == false && hasEmptyDependency == false && doesLevelNameExist == false && scenesToCreateInGameLevel.Count > 0)
             {
                 if (GUILayout.Button("Create Level"))
@@ -199,6 +202,11 @@ namespace IND.Editor.GameLevelsToolkit
             AssetDatabase.Refresh();
 
             OpenGameLevel.OpenLevel(createdGameLevel, true, false, true);
+
+            if(addLevelToUnityBuildScenes == true)
+            {
+                BuildSettingsSceneManagement.AddLevelToBuild(createdGameLevel);
+            }
         }
 
         private bool CheckIfHasNoLocationName()

@@ -264,11 +264,17 @@ namespace IND.Editor.GameLevelsToolkit
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
 
+            EditorSceneManager.MarkAllScenesDirty();
+
             //Setup Master Scene
             Scene currentScene = SceneManager.GetActiveScene();
             // GameObject geo = new GameObject();
             GameObject go = new GameObject("Game Level Manager");
             go.AddComponent<GameLevelManager>();
+
+            EditorSceneManager.SaveOpenScenes();
+
+            BuildSettingsSceneManagement.AddMasterSceneToBuild();
 
             initialDataHasBeenCreated = true;
         }

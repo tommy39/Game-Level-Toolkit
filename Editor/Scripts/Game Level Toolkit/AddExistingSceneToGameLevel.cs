@@ -1,4 +1,5 @@
 ﻿using IND.Core.GameLevels;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -31,18 +32,24 @@ namespace IND.Editor.GameLevelsToolkit
         {
             selectedValue = EditorGUILayout.Popup("Selected Level", selectedValue, levelOptions);
             targetGameLevel = levels[selectedValue];
-            EditorGUILayout.HelpBox("Use The Directory After 'Assets/', e.g. 'Scenes/MyScene01'", MessageType.Info);
-            
+            EditorGUILayout.HelpBox("Use The Directory After 'Assets/', e.g. folder ['Scenes'] and scene ['sceneName']", MessageType.Info);
+
             targetSceneFolderPath = EditorGUILayout.TextField("Target Scene Folder Path", targetSceneFolderPath);
             targetSceneName = EditorGUILayout.TextField("Target Scene Name", targetSceneName);
 
-            if (!string.IsNullOrEmpty(targetSceneName))
+
+            if (File.Exists("Assets/" + targetSceneFolderPath + "/" + targetSceneName + ".unity"))
             {
-                if(GUILayout.Button("Add Scene To Selected Level"))
+                if (GUILayout.Button("Add Scene To Selected Level"))
                 {
                     AddSceneToLocation();
                 }
             }
+            else
+            {
+                EditorGUILayout.HelpBox("Target Scene Can Not Be Found", MessageType.Error);
+            }
+
         }
 
 

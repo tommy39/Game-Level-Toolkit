@@ -1,6 +1,7 @@
 ﻿using IND.Core.GameLevels;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,9 +10,7 @@ namespace IND.Editor.GameLevelsToolkit
     public class DecoupleSceneFromGameLevel : EditorWindow
     {
         public static DecoupleSceneFromGameLevel window;
-       // [InlineEditor] [Required]
         public GameLevel selectedGameLevel;
-       // [ShowIf("selectedLocation")] [ValueDropdown("GetAllSceneNames")] 
         public string targetSceneToDecouple;
         public string targetFolderToDumpSceneIn = "Scenes/";
 
@@ -38,17 +37,24 @@ namespace IND.Editor.GameLevelsToolkit
         private void OnGUI()
         {
             selectedValue = EditorGUILayout.Popup("Selected Level", selectedValue, levelOptions);
-            selectedSceneValue = EditorGUILayout.Popup("Scene To Delete", selectedSceneValue, sceneOptions);
+            selectedSceneValue = EditorGUILayout.Popup("Scene To Decouple", selectedSceneValue, sceneOptions);
             selectedGameLevel = levels[selectedValue];
             targetSceneToDecouple = sceneOptions[selectedSceneValue];
 
             EditorGUILayout.HelpBox("Use The Directory After 'Assets/', e.g. 'Scenes/MyScene01'", MessageType.Info);
             targetFolderToDumpSceneIn = EditorGUILayout.TextField("Target Folder To Dump Scene In", targetFolderToDumpSceneIn);
 
-            if (GUILayout.Button("Decouple Scene From Game Level"))
+            if (Directory.Exists("Assets/" + targetFolderToDumpSceneIn))
             {
-                DecoupleScene();
-                WindowRefresh.RefreshScenesList(selectedGameLevel, out sceneOptions, out selectedSceneValue);
+                if (GUILayout.Button("Decouple Scene From Game Level"))
+                {
+                    DecoupleScene();
+                    WindowRefresh.RefreshScenesList(selectedGameLevel, out sceneOptions, out selectedSceneValue);
+                }
+            }
+            else
+            {
+                EditorGUILayout.HelpBox("Target Folder Does Not Exist, Please Create Manually", MessageType.Error);
             }
         }
 
@@ -72,7 +78,7 @@ namespace IND.Editor.GameLevelsToolkit
                 return;
             }
 
-            if(!selectedGameLevel.assignedScenes.Contains(targetSceneToDecouple))
+            if (!selectedGameLevel.assignedScenes.Contains(targetSceneToDecouple))
             {
                 Debug.LogError("Scene Does Not Exist, Perhaps wrong one is chosen that has been removed");
                 return;
@@ -81,8 +87,6 @@ namespace IND.Editor.GameLevelsToolkit
             //Lets Rename The File So It Doesn't have any location  prefix
             string fileToPathToRename = selectedGameLevel.assignedScenesDirectory + "/" + selectedGameLevel.gameLevelName + "_" + targetSceneToDecouple + ".unity";
             AssetDatabase.RenameAsset(fileToPathToRename, targetSceneToDecouple);
-            //Debug.Log(fileToPathToRename);
-            //Debug.Log(targetFolderToDumpSceneIn);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
 
