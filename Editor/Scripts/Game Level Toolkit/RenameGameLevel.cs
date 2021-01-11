@@ -25,7 +25,7 @@ namespace IND.Editor.GameLevelsToolkit
 
         public static void OpenMenu()
         {
-            window = (RenameGameLevel)GetWindow(typeof(RenameGameLevel));
+            window = (RenameGameLevel)GetWindow(typeof(RenameGameLevel), false, "Rename Level");
             WindowRefresh.RefreshLevelsList(out window.levelOptions, out window.selectedValue, out window.levels, out window.gameLevelData);
             window.selectedGameLevel = window.levels[window.selectedValue];
         }

@@ -15,7 +15,7 @@ namespace IND.Editor.GameLevelsToolkit
 
         public static void OpenMenu()
         {
-            window = (MoveGameLevelsInstallDirectory)GetWindow(typeof(MoveGameLevelsInstallDirectory));
+            window = (MoveGameLevelsInstallDirectory)GetWindow(typeof(MoveGameLevelsInstallDirectory), false, "Move Game Level Toolkit Install Directory");
         }
 
         private void OnGUI()

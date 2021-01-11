@@ -23,7 +23,7 @@ namespace IND.Editor.GameLevelsToolkit
 
         public static void OpenMenu()
         {
-            window = (AddExistingSceneToGameLevel)GetWindow(typeof(AddExistingSceneToGameLevel));
+            window = (AddExistingSceneToGameLevel)GetWindow(typeof(AddExistingSceneToGameLevel), false, "Add Existing Scene To Level");
             WindowRefresh.RefreshLevelsList(out window.levelOptions, out window.selectedValue, out window.levels, out window.gameLevelData);
             window.targetGameLevel = window.levels[window.selectedValue];
         }

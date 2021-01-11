@@ -29,7 +29,7 @@ namespace IND.Editor.GameLevelsToolkit
 
         public static void OpenMenu()
         {
-            window = (CreateNewGameLevelMenu)GetWindow(typeof(CreateNewGameLevelMenu));
+            window = (CreateNewGameLevelMenu)GetWindow(typeof(CreateNewGameLevelMenu), false, "Create New Level");
             window.gameLevelData = GameLevelToolkitWindow.GetGameLevelsData();
         }
 

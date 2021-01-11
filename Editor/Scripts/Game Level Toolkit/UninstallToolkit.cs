@@ -10,7 +10,7 @@ namespace IND.Editor.GameLevelsToolkit
         public static UninstallToolkit window;
         public static void OpenMenu()
         {
-            window = (UninstallToolkit)GetWindow(typeof(UninstallToolkit));
+            window = (UninstallToolkit)GetWindow(typeof(UninstallToolkit), false, "Uninstall Game Level Toolkit");
         }
 
         private void OnGUI()

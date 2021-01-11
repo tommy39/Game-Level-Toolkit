@@ -34,7 +34,7 @@ namespace IND.Editor.GameLevelsToolkit
         {
             if (toolkitWindow == null)
             {
-                toolkitWindow = (GameLevelToolkitWindow)GetWindow(typeof(GameLevelToolkitWindow));
+                toolkitWindow = (GameLevelToolkitWindow)GetWindow(typeof(GameLevelToolkitWindow), false, "Game Level Toolkit");
             }
             toolkitWindow.settings = GetGameLevelToolkitSettings();
             toolkitWindow.gameLevelsData = GetGameLevelsData();

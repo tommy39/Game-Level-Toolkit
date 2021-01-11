@@ -28,7 +28,7 @@ namespace IND.Editor.GameLevelsToolkit
 
         public static void OpenMenu()
         {
-            window = (DecoupleSceneFromGameLevel)GetWindow(typeof(DecoupleSceneFromGameLevel));
+            window = (DecoupleSceneFromGameLevel)GetWindow(typeof(DecoupleSceneFromGameLevel), false, "Decouple Scene From Level");
             WindowRefresh.RefreshLevelsList(out window.levelOptions, out window.selectedValue, out window.levels, out window.gameLevelData);
             window.selectedGameLevel = window.levels[window.selectedValue];
             WindowRefresh.RefreshScenesList(window.selectedGameLevel, out window.sceneOptions, out window.selectedSceneValue);

@@ -27,7 +27,7 @@ namespace IND.Editor.GameLevelsToolkit
 
         public static void OpenMenu()
         {
-            window = GetWindow<RemoveLevelDepdendencyWindow>();
+            window = GetWindow<RemoveLevelDepdendencyWindow>("Remove Level Dependency");
             WindowRefresh.RefreshLevelsList(out window.targetLevelOptions, out window.selectedLevelValue, out window.targetLevels, out window.gameLevelData);
             window.targetLevel = window.targetLevels[window.selectedLevelValue];
             window.GetDependenciesList();

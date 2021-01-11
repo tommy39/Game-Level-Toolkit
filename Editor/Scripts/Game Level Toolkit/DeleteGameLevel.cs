@@ -25,7 +25,7 @@ public class DeleteGameLevel : EditorWindow
 
     public static void OpenMenu()
     {
-        window = (DeleteGameLevel)GetWindow(typeof(DeleteGameLevel));
+        window = (DeleteGameLevel)GetWindow(typeof(DeleteGameLevel), false, "Delete Level");
         WindowRefresh.RefreshLevelsList(out window.levelOptions, out window.selectedValue, out window.levels, out window.gameLevelData);
     }
 

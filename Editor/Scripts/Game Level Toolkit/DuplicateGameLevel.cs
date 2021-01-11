@@ -23,7 +23,7 @@ namespace IND.Editor.GameLevelsToolkit
 
         public static void OpenMenu()
         {
-            window = (DuplicateGameLevel)GetWindow(typeof(DuplicateGameLevel));
+            window = (DuplicateGameLevel)GetWindow(typeof(DuplicateGameLevel), false, "Duplicate Level");
             WindowRefresh.RefreshLevelsList(out window.levelOptions, out window.selectedValue, out window.levels, out window.gameLevelData);
         }
 

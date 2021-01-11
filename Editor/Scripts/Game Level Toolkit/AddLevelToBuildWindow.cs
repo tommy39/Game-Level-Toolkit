@@ -21,7 +21,7 @@ namespace IND.Editor.GameLevelsToolkit
 
         public static void OpenMenu()
         {
-            window = GetWindow<AddLevelToBuildWindow>();
+            window = GetWindow<AddLevelToBuildWindow>("Add Level To Build");
             WindowRefresh.RefreshLevelsList(out window.targetLevelOptions, out window.selectedLevelValue, out window.targetLevels, out window.gameLevelData);
             window.FilterPotentialLevels();
             if (window.targetLevels.Length > 0)

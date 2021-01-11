@@ -32,7 +32,7 @@ namespace IND.Editor.GameLevelsToolkit
 
         public static void OpenMenu()
         {
-            window = (OpenGameLevel)GetWindow(typeof(OpenGameLevel));
+            window = (OpenGameLevel)GetWindow(typeof(OpenGameLevel), false, "Load Game Level");
             window.gameLevelData = GameLevelToolkitWindow.GetGameLevelsData();
             window.selectedValue = 0;
             window.levels = window.gameLevelData.gameLevelsCreatedByUser.ToArray();
@@ -47,7 +47,7 @@ namespace IND.Editor.GameLevelsToolkit
         private void OnGUI()
         {
             categories = CategoriesManagement.GetAllCategories(true, true);
-            selectedCategoryValue = EditorGUILayout.Popup("Category To Assign Level Too", selectedCategoryValue, categories);
+            selectedCategoryValue = EditorGUILayout.Popup("Selected Category", selectedCategoryValue, categories);
             levels = CategoriesManagement.GetGameLevelsBasedOnCategory(categories[selectedCategoryValue]);
             List<string> levelsToString = new List<string>();
             if (levels.Length > 0)

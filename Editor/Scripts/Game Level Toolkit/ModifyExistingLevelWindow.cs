@@ -11,7 +11,7 @@ namespace IND.Editor.GameLevelsToolkit
 
         public static void OpenMenu()
         {
-            window = (ModifyExistingLevelWindow)GetWindow(typeof(ModifyExistingLevelWindow));
+            window = (ModifyExistingLevelWindow)GetWindow(typeof(ModifyExistingLevelWindow), false, "Modify Level");
         }
 
         private void OnGUI()

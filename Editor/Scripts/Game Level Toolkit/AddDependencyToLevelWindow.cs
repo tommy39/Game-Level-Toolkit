@@ -28,7 +28,7 @@ namespace IND.Editor.GameLevelsToolkit
 
         public static void OpenMenu()
         {
-            window = GetWindow<AddDependencyToLevelWindow>();
+            window = GetWindow<AddDependencyToLevelWindow>("Add Dependency To Level");
             WindowRefresh.RefreshLevelsList(out window.targetLevelOptions, out window.selectedLevelValue, out window.targetLevels, out window.gameLevelData);
             window.targetLevel = window.targetLevels[window.selectedLevelValue];
             window.selectedDependencyValue = 0;
