@@ -41,6 +41,11 @@ namespace IND.Editor.GameLevelsToolkit
                 RenameExistingLevel();
             }
 
+            if(GUILayout.Button("Change Level Category"))
+            {
+                AssignCategoryToLevel.OpenMenu();
+            }
+
             if (GUILayout.Button("Rename Scene"))
             {
                 RenameScene();

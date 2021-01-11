@@ -64,7 +64,7 @@ namespace IND.Editor.GameLevelsToolkit
                 selectedValue = EditorGUILayout.Popup("Level To Load", selectedValue, levelOptionsToLoad);
                 includeMasterScene = EditorGUILayout.Toggle("Load Master Scene", includeMasterScene);
                 includeDependencies = EditorGUILayout.Toggle("Load Dependencies", includeDependencies);
-                keepCurrentScenesThatAreOpenOpeneded = EditorGUILayout.Toggle("Keep Current Open Scenes Opened", keepCurrentScenesThatAreOpenOpeneded);
+                keepCurrentScenesThatAreOpenOpeneded = EditorGUILayout.Toggle("Keep Current Scenes", keepCurrentScenesThatAreOpenOpeneded);
 
                 if (GUILayout.Button("Load Seleected Level"))
                 {
