@@ -60,15 +60,13 @@ namespace IND.Editor.GameLevelsToolkit
             {
                 DecoupleSceneFromLevel();
             }
-
-            if(GUILayout.Button("Remove a Dependency From Level"))
-            {
-                RemoveLevelDepdendencyWindow.OpenMenu();
-            }
-
             if (GUILayout.Button("Add a Dependency to a Level"))
             {
                 AddDependencyToLevelWindow.OpenMenu();
+            }
+            if (GUILayout.Button("Remove a Dependency From Level"))
+            {
+                RemoveLevelDepdendencyWindow.OpenMenu();
             }
 
             if(GUILayout.Button("Add A Level to Scenes Build Index"))

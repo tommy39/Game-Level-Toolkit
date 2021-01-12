@@ -11,7 +11,7 @@ namespace IND.Editor.GameLevelsToolkit
         public static CategoriesWindow window;
         public static void OpenMenu()
         {
-            window = GetWindow<CategoriesWindow>();
+            window = GetWindow<CategoriesWindow>("Modify Categories");
         }
 
         private void OnGUI()

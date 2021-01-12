@@ -33,7 +33,7 @@ namespace IND.Editor.GameLevelsToolkit
             selectedGameLevel = levels[selectedValue];
             sceneNameToCreate = EditorGUILayout.TextField("New Scene Name", sceneNameToCreate);
 
-            automaticallyAddSceneToBuild = EditorGUILayout.Toggle("Automatically add scene to build index", automaticallyAddSceneToBuild);
+            automaticallyAddSceneToBuild = EditorGUILayout.Toggle("Add to build index", automaticallyAddSceneToBuild);
 
             bool hasExistingSceneName = false;
             for (int i = 0; i < selectedGameLevel.assignedScenes.Count; i++)

@@ -39,8 +39,6 @@ namespace IND.Editor.GameLevelsToolkit
             selectedLevelValue = EditorGUILayout.Popup("Selected Level", selectedLevelValue, targetLevelOptions);
             targetLevel = targetLevels[selectedLevelValue];
 
-            GetDependenciesList();
-
             //Display a list of all dependencies assigned to the level
             if(targetDependencies.Length > 0)
             {
@@ -65,8 +63,11 @@ namespace IND.Editor.GameLevelsToolkit
         {
             EditorUtility.SetDirty(targetLevel);
             targetLevel.levelDependencies.Remove(targetDependencyToRemove);
+
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
+
+            GetDependenciesList();
         }
 
         private void GetDependenciesList()

@@ -12,7 +12,7 @@ namespace IND.Editor.GameLevelsToolkit
 
         public static void OpenMenu()
         {
-            window = GetWindow<CreateCategoryWindow>();
+            window = GetWindow<CreateCategoryWindow>("Create New Category");
         }
 
         private void OnGUI()

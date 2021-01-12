@@ -113,7 +113,7 @@ namespace IND.Editor.GameLevelsToolkit
             AssetDatabase.Refresh();
 
             //Move the scene to the correct Directory
-            string adjustedDirectoryToMoveSceneFrom = "Assets/" + projectPathName + "Scenes/" + targetSceneFolderPath + "/" + finalSceneName;
+            string adjustedDirectoryToMoveSceneFrom = "Assets/" + projectPathName  + targetSceneFolderPath + "/" + targetSceneName + ".unity";
             string directoryToMoveSceneTo = targetGameLevel.assignedScenesDirectory + "/" + finalSceneName;
             FileUtil.MoveFileOrDirectory(adjustedDirectoryToMoveSceneFrom, directoryToMoveSceneTo);
             EditorUtility.SetDirty(targetGameLevel);
