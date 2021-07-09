@@ -1,4 +1,4 @@
-#About
+# About
 A Tool that aims to streamline the process of working with multiple scenes at a single time in a project within unity both in the editor and in-game.
 
 # Purpose
